@@ -1,35 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
+  const opinions = [
+    { nick: 'cool-idea-nick-1', name: 'Opinion 1', description: 'Description of opinion 1...' },
+    { nick: 'cool-opinion-nick-2', name: 'Opinion 2', description: 'Description of opinion 2...' },
+    { nick: 'cool-opinion-nick-3', name: 'Opinion 3', description: 'Description of opinion 3...' },
+    { nick: 'cool-opinion-nick-4', name: 'Opinion 4', description: 'Description of opinion 4...' },
+    { nick: 'cool-opinion-nick-5', name: 'Opinion 5', description: 'Description of opinion 5...' },
+  ]
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Test</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1>unpopular opinion.</h1>
+      {opinions.map((opinion) => (
+        <div key={opinion.nick}>
+          <h2>{opinion.name}</h2>
+          <p>{opinion.description}</p>
+        </div>
+      ))}
+    </div>
   )
 }
-
-export default App
