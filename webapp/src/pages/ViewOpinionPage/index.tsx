@@ -1,17 +1,27 @@
 import { useParams } from 'react-router-dom'
+import { type ViewOpinionParams } from '../../lib/routes'
+import { trpc } from '../../lib/trpc'
 
 export const ViewOpinionPage = () => {
-  const { opinionNick } = useParams()
+  const { opinionNick } = useParams() as ViewOpinionParams
 
-  return opinionNick ? (
+  const { data, error, isLoading, isFetching, isError } = trpc.getOpinion.useQuery({ opinionNick })
+
+  if (isLoading || isFetching) {
+    return <span>loading...</span>
+  }
+
+  if (isError) {
+    return <span>error: {error.message}</span>
+  }
+
+  return data.opinion ? (
     <div>
-      <h1>{opinionNick}</h1>
-      <p>description of opinion 1...</p>
-      <div>
-        <p>text paragraph</p>
-        <p>text paragraph</p>
-        <p>text paragraph</p>
-      </div>
+      <h1>{data.opinion.name}</h1>
+      <p>{data.opinion.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: data.opinion.text }}></div>
     </div>
-  ) : null
+  ) : (
+    <p>opinion not found.</p>
+  )
 }
