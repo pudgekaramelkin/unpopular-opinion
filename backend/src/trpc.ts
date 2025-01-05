@@ -1,18 +1,18 @@
 import { initTRPC } from '@trpc/server'
+import _ from 'lodash'
 
-const opinions = [
-  { nick: 'bad-guy-1', name: 'Opinion 1', description: 'Description of opinion 1...' },
-  { nick: 'bad-guy-2', name: 'Opinion 2', description: 'Description of opinion 2...' },
-  { nick: 'bad-guy-3', name: 'Opinion 3', description: 'Description of opinion 3...' },
-  { nick: 'bad-guy-4', name: 'Opinion 4', description: 'Description of opinion 4...' },
-  { nick: 'bad-guy-5', name: 'Opinion 5', description: 'Description of opinion 5...' },
-]
+const opinions = _.times(50, (x) => ({
+  nick: `opinion-nick-${x}`,
+  name: `opinion-${x}.`,
+  description: `Description of opinion ${x}..`,
+  text: _.times(10, (i) => `<p>text of paragraph ${i} of opinion ${i}</p>`).join(''),
+}))
 
 const trpc = initTRPC.create()
 
 export const trpcRouter = trpc.router({
   getOpinions: trpc.procedure.query(() => {
-    return { opinions }
+    return { opinions: opinions.map((opinion) => _.pick(opinion, ['nick', 'name', 'description'])) }
   }),
 })
 
