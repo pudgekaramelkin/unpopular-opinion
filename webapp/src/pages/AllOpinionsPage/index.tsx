@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { getViewOpinionRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 export const AllOpinionsPage = () => {
@@ -16,7 +18,9 @@ export const AllOpinionsPage = () => {
       <h1>all opinions.</h1>
       {data.opinions.map((opinion) => (
         <div key={opinion.nick}>
-          <h2>{opinion.name}</h2>
+          <h2>
+            <Link to={getViewOpinionRoute({ opinionNick: opinion.nick })}>{opinion.name}</Link>
+          </h2>
           <p>{opinion.description}</p>
         </div>
       ))}
