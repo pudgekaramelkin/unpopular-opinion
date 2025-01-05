@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Layout } from './components/Layout'
 import { getAllOpinionsRoute, getViewOpinionRoute, viewOpinionRouteParams } from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
@@ -9,8 +10,10 @@ export const App = () => {
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={getAllOpinionsRoute()} element={<AllOpinionsPage />} />
-          <Route path={getViewOpinionRoute(viewOpinionRouteParams)} element={<ViewOpinionPage />} />
+          <Route element={<Layout />}>
+            <Route path={getAllOpinionsRoute()} element={<AllOpinionsPage />} />
+            <Route path={getViewOpinionRoute(viewOpinionRouteParams)} element={<ViewOpinionPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </TrpcProvider>
