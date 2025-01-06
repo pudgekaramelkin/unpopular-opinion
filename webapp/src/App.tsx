@@ -4,6 +4,7 @@ import { getAllOpinionsRoute, getViewOpinionRoute, viewOpinionRouteParams } from
 import { TrpcProvider } from './lib/trpc'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
 import { ViewOpinionPage } from './pages/ViewOpinionPage'
+import './styles/global.scss'
 
 export const App = () => {
   return (
