@@ -1,16 +1,8 @@
+import { type FormikProps } from 'formik'
 import styles from './index.module.scss'
 
-export const Input = ({
-  name,
-  label,
-  state,
-  setState,
-}: {
-  name: string
-  label: string
-  state: Record<string, any>
-  setState: React.Dispatch<React.SetStateAction<any>>
-}) => {
+export const Input = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
+  const value = formik.values[name]
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
@@ -18,9 +10,9 @@ export const Input = ({
       <input
         type="text"
         onChange={(e) => {
-          setState({ ...state, [name]: e.target.value })
+          void formik.setFieldValue(name, e.target.value)
         }}
-        value={state[name]}
+        value={value}
         name={name}
         id={name}
       />

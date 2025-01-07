@@ -1,14 +1,19 @@
-import { useState } from 'react'
+import { useFormik } from 'formik'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
 
 export const NewOpinionPage = () => {
-  const [state, setState] = useState({
-    name: '',
-    nick: '',
-    description: '',
-    text: '',
+  const formik = useFormik({
+    initialValues: {
+      name: '',
+      nick: '',
+      description: '',
+      text: '',
+    },
+    onSubmit: (values) => {
+      console.info(values)
+    },
   })
 
   return (
@@ -16,13 +21,13 @@ export const NewOpinionPage = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault()
-          console.info(state)
+          formik.handleSubmit()
         }}
       >
-        <Input name="name" label="name" state={state} setState={setState} />
-        <Input name="nick" label="nick" state={state} setState={setState} />
-        <Input name="description" label="description" state={state} setState={setState} />
-        <Textarea name="text" label="text" state={state} setState={setState} />
+        <Input name="name" label="name" formik={formik} />
+        <Input name="nick" label="nick" formik={formik} />
+        <Input name="description" label="description" formik={formik} />
+        <Textarea name="text" label="text" formik={formik} />
         <button type="submit">create opinion</button>
       </form>
     </Segment>
