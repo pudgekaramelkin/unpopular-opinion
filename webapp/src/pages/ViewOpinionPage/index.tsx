@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { Segment } from '../../components/Segment'
 import { type ViewOpinionParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import styles from './index.module.scss'
@@ -17,11 +18,9 @@ export const ViewOpinionPage = () => {
   }
 
   return data.opinion ? (
-    <div>
-      <h1 className={styles.title}>{data.opinion.name}</h1>
-      <p className={styles.description}>{data.opinion.description}</p>
+    <Segment title={data.opinion.name} description={data.opinion.description}>
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.opinion.text }}></div>
-    </div>
+    </Segment>
   ) : (
     <p className={styles.description}>opinion not found.</p>
   )

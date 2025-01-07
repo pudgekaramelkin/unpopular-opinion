@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Segment } from '../../components/Segment'
 import { getViewOpinionRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import styles from './index.module.scss'
@@ -15,20 +16,23 @@ export const AllOpinionsPage = () => {
   }
 
   return data ? (
-    <div>
-      <h1 className={styles.title}>all opinions.</h1>
+    <Segment title="all opinions.">
       <div className={styles.opinions}>
         {data.opinions.map((opinion) => (
           <div className={styles.opinion} key={opinion.nick}>
-            <h2 className={styles.opinionName}>
-              <Link className={styles.opinionLink} to={getViewOpinionRoute({ opinionNick: opinion.nick })}>
-                {opinion.name}
-              </Link>
-            </h2>
-            <p className={styles.opinionDescription}>{opinion.description}</p>
+            <p className={styles.opinionDescription}>{}</p>
+            <Segment
+              size={2}
+              title={
+                <Link className={styles.opinionLink} to={getViewOpinionRoute({ opinionNick: opinion.nick })}>
+                  {opinion.name}
+                </Link>
+              }
+              description={opinion.description}
+            />
           </div>
         ))}
       </div>
-    </div>
+    </Segment>
   ) : null
 }
