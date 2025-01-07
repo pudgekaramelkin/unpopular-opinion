@@ -1,5 +1,5 @@
 import { Link, Outlet } from 'react-router-dom'
-import { getAllOpinionsRoute } from '../../lib/routes'
+import * as routes from '../../lib/routes'
 import styles from './index.module.scss'
 
 export const Layout = () => {
@@ -9,8 +9,13 @@ export const Layout = () => {
         <div className={styles.logo}>unpopularopinion.</div>
         <ul className={styles.menu}>
           <li className={styles.item}>
-            <Link className={styles.link} to={getAllOpinionsRoute()}>
+            <Link className={styles.link} to={routes.getAllOpinionsRoute()}>
               all opinions.
+            </Link>
+          </li>
+          <li className={styles.item}>
+            <Link className={styles.link} to={routes.getNewOpinionRoute()}>
+              add opinion.
             </Link>
           </li>
         </ul>

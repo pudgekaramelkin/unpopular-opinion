@@ -3,6 +3,10 @@ const getRouteParams = <T extends Record<string, boolean>>(object: T) => {
 }
 
 export const getAllOpinionsRoute = () => '/'
+
 export const viewOpinionRouteParams = getRouteParams({ opinionNick: true })
 export type ViewOpinionParams = typeof viewOpinionRouteParams
+
 export const getViewOpinionRoute = ({ opinionNick }: ViewOpinionParams) => `opinions/${opinionNick}`
+
+export const getNewOpinionRoute = () => '/opinions/new'
