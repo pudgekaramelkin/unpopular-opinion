@@ -4,8 +4,11 @@ import z from 'zod'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
+import { trpc } from '../../lib/trpc'
 
 export const NewOpinionPage = () => {
+  const createOpinion = trpc.createOpinion.useMutation()
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -27,8 +30,8 @@ export const NewOpinionPage = () => {
         text: z.string().min(100, 'text should be at least 100 characters long.'),
       })
     ),
-    onSubmit: (values) => {
-      console.info(values)
+    onSubmit: async (values) => {
+      await createOpinion.mutateAsync(values)
     },
   })
 
