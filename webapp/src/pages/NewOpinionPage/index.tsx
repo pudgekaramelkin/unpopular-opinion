@@ -55,7 +55,7 @@ export const NewOpinionPage = () => {
         <Input name="nick" label="nick" formik={formik} />
         <Input name="description" label="description" formik={formik} />
         <Textarea name="text" label="text" formik={formik} />
-        {!formik.isValid && <div style={{ color: 'red' }}>some fields are invalid.</div>}
+        {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>some fields are invalid.</div>}
         <button type="submit">create opinion</button>
       </form>
     </Segment>
