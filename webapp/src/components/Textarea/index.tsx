@@ -3,6 +3,8 @@ import styles from './index.module.scss'
 
 export const Textarea = ({ name, label, formik }: { name: string; label: string; formik: FormikProps<any> }) => {
   const value = formik.values[name]
+  const error = formik.errors[name] as string | undefined
+
   return (
     <div className={styles.container}>
       <label htmlFor={name}>{label}</label>
@@ -15,6 +17,7 @@ export const Textarea = ({ name, label, formik }: { name: string; label: string;
         name={name}
         id={name}
       />
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   )
 }
