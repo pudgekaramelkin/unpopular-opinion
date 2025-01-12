@@ -9,6 +9,7 @@ import { trpc } from '../../lib/trpc'
 
 export const NewOpinionPage = () => {
   const [successMessageVisible, setSuccessMessageVisible] = useState(false)
+  const [submittingError, setSubmittingError] = useState<string | null>(null)
 
   const createOpinion = trpc.createOpinion.useMutation()
 
@@ -21,12 +22,19 @@ export const NewOpinionPage = () => {
     },
     validate: withZodSchema(zCreateOpinionTrpcInput),
     onSubmit: async (values) => {
-      await createOpinion.mutateAsync(values)
-      formik.resetForm()
-      setSuccessMessageVisible(true)
-      setTimeout(() => {
-        setSuccessMessageVisible(false)
-      }, 3000)
+      try {
+        await createOpinion.mutateAsync(values)
+        formik.resetForm()
+        setSuccessMessageVisible(true)
+        setTimeout(() => {
+          setSuccessMessageVisible(false)
+        }, 3000)
+      } catch (err: any) {
+        setSubmittingError(err.message)
+        setTimeout(() => {
+          setSubmittingError(null)
+        }, 3000)
+      }
     },
   })
 
@@ -44,6 +52,7 @@ export const NewOpinionPage = () => {
         <Textarea name="text" label="text" formik={formik} />
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>some fields are invalid.</div>}
         {successMessageVisible && <div style={{ color: 'green' }}>opinion created!</div>}
+        {!!submittingError && <div style={{ color: 'red' }}>{submittingError}</div>}
         <button type="submit" disabled={formik.isSubmitting}>
           {formik.isSubmitting ? 'submitting...' : 'create opinion'}
         </button>
