@@ -90,6 +90,9 @@ importers:
       formik:
         specifier: ^2.4.6
         version: 2.4.6(react@18.3.1)
+      formik-validator-zod:
+        specifier: ^2.0.1
+        version: 2.0.1(formik@2.4.6(react@18.3.1))(zod@3.24.1)
       include-media:
         specifier: ^2.0.0
         version: 2.0.0
@@ -108,6 +111,9 @@ importers:
       sass:
         specifier: ^1.83.1
         version: 1.83.1
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.1
     devDependencies:
       '@types/react':
         specifier: ^18.3.18
@@ -2193,6 +2199,12 @@ packages:
   foreground-child@3.3.0:
     resolution: {integrity: sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==}
     engines: {node: '>=14'}
+
+  formik-validator-zod@2.0.1:
+    resolution: {integrity: sha512-+Jz/YnA04IRcImKlrwbG8vKvgx1Zb0HfsDwH36e03zYOUGf6seUrgm4XyBdrr2vg6IO+n9b5oSWPNSUHBewHDw==}
+    peerDependencies:
+      formik: ^2.2.9
+      zod: ^3.19.1
 
   formik@2.4.6:
     resolution: {integrity: sha512-A+2EI7U7aG296q2TLGvNapDNTZp1khVt5Vk0Q/fyfSROss0V/V6+txt2aJnwEos44IxTCW/LYAi/zgWzlevj+g==}
@@ -6062,6 +6074,11 @@ snapshots:
     dependencies:
       cross-spawn: 7.0.6
       signal-exit: 4.1.0
+
+  formik-validator-zod@2.0.1(formik@2.4.6(react@18.3.1))(zod@3.24.1):
+    dependencies:
+      formik: 2.4.6(react@18.3.1)
+      zod: 3.24.1
 
   formik@2.4.6(react@18.3.1):
     dependencies:

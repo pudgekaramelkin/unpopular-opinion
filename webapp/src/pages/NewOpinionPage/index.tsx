@@ -1,4 +1,6 @@
 import { useFormik } from 'formik'
+import { withZodSchema } from 'formik-validator-zod'
+import z from 'zod'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
@@ -11,33 +13,14 @@ export const NewOpinionPage = () => {
       description: '',
       text: '',
     },
-    validate: (values) => {
-      const errors: Partial<typeof values> = {}
-
-      if (!values.name) {
-        errors.name = 'name is required.'
-      } else if (!values.name.match(/^[a-z0-9].*\.$/)) {
-        errors.name = 'name first letter must be in lower case and last letter must be a dot.'
-      }
-
-      if (!values.nick) {
-        errors.nick = 'nick is required.'
-      } else if (!values.nick.match(/^[a-z0-9-]+$/)) {
-        errors.nick = 'nick may contain only lowercase letters, numbers and dashes.'
-      }
-
-      if (!values.description) {
-        errors.description = 'description is required.'
-      }
-
-      if (!values.text) {
-        errors.text = 'text is required.'
-      } else if (values.text.length < 100) {
-        errors.text = 'text should be at least 100 characters long'
-      }
-
-      return errors
-    },
+    validate: withZodSchema(
+      z.object({
+        name: z.string().min(1).regex(/^[a-z0-9].*\.$/, 'name first letter must be in lower case and last letter must be a dot.'),
+        nick: z.string().min(1).regex(/^[a-z0-9-]+$/, 'nick may contain only lowercase letters, numbers and dashes.'),
+        description: z.string().min(1, 'description should be at least 1 characters long.'),
+        text: z.string().min(100, 'text should be at least 100 characters long.'),
+      })
+    ),
     onSubmit: (values) => {
       console.info(values)
     },
