@@ -1,6 +1,6 @@
+import { zCreateOpinionTrpcInput } from '@unpopularopinion/backend/src/router/createOpinion/input'
 import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
-import z from 'zod'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
@@ -16,20 +16,7 @@ export const NewOpinionPage = () => {
       description: '',
       text: '',
     },
-    validate: withZodSchema(
-      z.object({
-        name: z
-          .string()
-          .min(1)
-          .regex(/^[a-z0-9].*\.$/, 'name first letter must be in lower case and last letter must be a dot.'),
-        nick: z
-          .string()
-          .min(1)
-          .regex(/^[a-z0-9-]+$/, 'nick may contain only lowercase letters, numbers and dashes.'),
-        description: z.string().min(1, 'description should be at least 1 characters long.'),
-        text: z.string().min(100, 'text should be at least 100 characters long.'),
-      })
-    ),
+    validate: withZodSchema(zCreateOpinionTrpcInput),
     onSubmit: async (values) => {
       await createOpinion.mutateAsync(values)
     },
