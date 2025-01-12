@@ -3,6 +3,7 @@ import { useFormik } from 'formik'
 import { withZodSchema } from 'formik-validator-zod'
 import { useState } from 'react'
 import { Alert } from '../../components/Alert'
+import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
@@ -54,9 +55,7 @@ export const NewOpinionPage = () => {
         {!formik.isValid && !!formik.submitCount && <div style={{ color: 'red' }}>some fields are invalid.</div>}
         {!!submittingError && <Alert color="red">{submittingError}</Alert>}
         {successMessageVisible && <Alert color="green">opinion created!</Alert>}
-        <button type="submit" disabled={formik.isSubmitting}>
-          {formik.isSubmitting ? 'submitting...' : 'create opinion'}
-        </button>
+        <Button loading={formik.isSubmitting}>create opinion</Button>
       </form>
     </Segment>
   )

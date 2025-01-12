@@ -1,0 +1,28 @@
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
+.button {
+  padding: 8px 15px;
+  color: $brown;
+  background-color: #19a019d7;
+  border: none;
+  font-weight: bold;
+  font-family: $defaultFontFamily;
+  border-radius: $borderRadiusSmall;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: #1ec41e;
+  }
+
+  &:active {
+    background-color: #4bec4b;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    background-color: #929292;
+    color: #d9d9d9;
+  }
+}
