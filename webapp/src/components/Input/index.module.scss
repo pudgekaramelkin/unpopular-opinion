@@ -16,7 +16,7 @@
     display: block;
     padding: 7px;
     border: 1px solid $brown;
-    border-radius: 3px;
+    border-radius: $borderRadiusSmall;
     background-color: $sandyWhite;
     outline: none;
     width: 100%;
