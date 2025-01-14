@@ -1,3 +1,4 @@
+import format from 'date-fns/format'
 import { useParams } from 'react-router-dom'
 import { Segment } from '../../components/Segment'
 import { type ViewOpinionParams } from '../../lib/routes'
@@ -20,6 +21,7 @@ export const ViewOpinionPage = () => {
   return data.opinion ? (
     <Segment title={data.opinion.name} description={data.opinion.description}>
       <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.opinion.text }}></div>
+      <div className={styles.createdAt}>created at: {format(data.opinion.createdAt, 'yyyy-MM-dd')}</div>
     </Segment>
   ) : (
     <p className={styles.description}>opinion not found.</p>
