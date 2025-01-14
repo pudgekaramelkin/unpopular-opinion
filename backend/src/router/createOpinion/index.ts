@@ -1,4 +1,4 @@
-import { opinions } from '../../lib/ideas'
+import { opinions } from '../../lib/opinions'
 import { trpc } from '../../lib/trpc'
 import { zCreateOpinionTrpcInput } from './input'
 
