@@ -4,6 +4,7 @@ import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
 import { NewOpinionPage } from './pages/NewOpinionPage'
+import { SignInPage } from './pages/SignInPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { ViewOpinionPage } from './pages/ViewOpinionPage'
 
@@ -19,6 +20,7 @@ export const App = () => {
             <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
             <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
             <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
+            <Route path={routes.getSignInRoute()} element={<SignInPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

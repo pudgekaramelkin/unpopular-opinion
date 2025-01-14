@@ -12,3 +12,5 @@ export const getViewOpinionRoute = ({ opinionNick }: ViewOpinionParams) => `opin
 export const getNewOpinionRoute = () => '/opinions/new'
 
 export const getSignUpRoute = () => '/sign-up'
+
+export const getSignInRoute = () => '/sign-in'

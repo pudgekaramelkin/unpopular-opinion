@@ -23,6 +23,11 @@ export const Layout = () => {
               sign up.
             </Link>
           </li>
+          <li className={styles.item}>
+            <Link className={styles.link} to={routes.getSignInRoute()}>
+              sign in.
+            </Link>
+          </li>
         </ul>
       </div>
       <div className={styles.content}>
