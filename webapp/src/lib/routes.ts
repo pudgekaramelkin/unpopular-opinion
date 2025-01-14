@@ -10,3 +10,5 @@ export type ViewOpinionParams = typeof viewOpinionRouteParams
 export const getViewOpinionRoute = ({ opinionNick }: ViewOpinionParams) => `opinions/${opinionNick}`
 
 export const getNewOpinionRoute = () => '/opinions/new'
+
+export const getSignUpRoute = () => '/sign-up'

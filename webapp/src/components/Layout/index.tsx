@@ -18,6 +18,11 @@ export const Layout = () => {
               add opinion.
             </Link>
           </li>
+          <li className={styles.item}>
+            <Link className={styles.link} to={routes.getSignUpRoute()}>
+              sign up.
+            </Link>
+          </li>
         </ul>
       </div>
       <div className={styles.content}>
