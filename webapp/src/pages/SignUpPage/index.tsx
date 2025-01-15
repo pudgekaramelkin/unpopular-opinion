@@ -51,16 +51,16 @@ export const SignUpPage = () => {
   })
 
   return (
-    <Segment title="Sign Up">
+    <Segment title="sign up.">
       <form onSubmit={formik.handleSubmit}>
         <FormItems>
-          <Input label="Nick" name="nick" formik={formik} />
-          <Input label="Password" name="password" type="password" formik={formik} />
-          <Input label="Password again" name="passwordAgain" type="password" formik={formik} />
+          <Input label="nick" name="nick" formik={formik} />
+          <Input label="password" name="password" type="password" formik={formik} />
+          <Input label="password again" name="passwordAgain" type="password" formik={formik} />
           {!formik.isValid && !!formik.submitCount && <Alert color="red">some fields are invalid.</Alert>}
           {submittingError && <Alert color="red">{submittingError}</Alert>}
           {successMessageVisible && <Alert color="green">thanks for sign up!</Alert>}
-          <Button loading={formik.isSubmitting}>sign up.</Button>
+          <Button loading={formik.isSubmitting}>sign up</Button>
         </FormItems>
       </form>
     </Segment>

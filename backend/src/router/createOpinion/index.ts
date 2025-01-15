@@ -8,7 +8,7 @@ export const createOpinionTrpcRoute = trpc.procedure.input(zCreateOpinionTrpcInp
     },
   })
   if (exOpinion) {
-    throw Error('opinion has been created')
+    throw Error('opinion has already been created')
   }
   await ctx.prisma.opinion.create({
     data: input,
