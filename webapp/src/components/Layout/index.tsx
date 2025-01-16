@@ -1,8 +1,11 @@
 import { Link, Outlet } from 'react-router-dom'
 import * as routes from '../../lib/routes'
+import { trpc } from '../../lib/trpc'
 import styles from './index.module.scss'
 
 export const Layout = () => {
+  const { data, isLoading, isFetching, isError } = trpc.getMe.useQuery()
+
   return (
     <div className={styles.layout}>
       <div className={styles.navigation}>
@@ -13,21 +16,33 @@ export const Layout = () => {
               all opinions.
             </Link>
           </li>
-          <li className={styles.item}>
-            <Link className={styles.link} to={routes.getNewOpinionRoute()}>
-              add opinion.
-            </Link>
-          </li>
-          <li className={styles.item}>
-            <Link className={styles.link} to={routes.getSignUpRoute()}>
-              sign up.
-            </Link>
-          </li>
-          <li className={styles.item}>
-            <Link className={styles.link} to={routes.getSignInRoute()}>
-              sign in.
-            </Link>
-          </li>
+          {isLoading || isFetching || isError ? null : data.me ? (
+            <>
+              <li className={styles.item}>
+                <Link className={styles.link} to={routes.getNewOpinionRoute()}>
+                  add opinion.
+                </Link>
+              </li>
+              <li className={styles.item}>
+                <Link className={styles.link} to={routes.getSignOutRoute()}>
+                  log out ({data.me.nick}).
+                </Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className={styles.item}>
+                <Link className={styles.link} to={routes.getSignUpRoute()}>
+                  sign up.
+                </Link>
+              </li>
+              <li className={styles.item}>
+                <Link className={styles.link} to={routes.getSignInRoute()}>
+                  sign in.
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
       <div className={styles.content}>

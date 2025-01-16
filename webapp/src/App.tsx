@@ -5,6 +5,7 @@ import { TrpcProvider } from './lib/trpc'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
 import { NewOpinionPage } from './pages/NewOpinionPage'
 import { SignInPage } from './pages/SignInPage'
+import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { ViewOpinionPage } from './pages/ViewOpinionPage'
 
@@ -15,6 +16,7 @@ export const App = () => {
     <TrpcProvider>
       <BrowserRouter>
         <Routes>
+          <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
           <Route element={<Layout />}>
             <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
             <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
