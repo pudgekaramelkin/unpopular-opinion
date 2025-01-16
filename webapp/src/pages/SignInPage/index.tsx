@@ -27,7 +27,7 @@ export const SignInPage = () => {
       try {
         setSubmittingError(null)
         const { token } = await signIn.mutateAsync(values)
-        Cookies.set('user-token', token, { expires: 99999 })
+        Cookies.set('unpopularopinion-token', token, { expires: 99999 })
         void trpcUtils.invalidate()
         void navigate(routes.getAllOpinionsRoute())
       } catch (err: any) {

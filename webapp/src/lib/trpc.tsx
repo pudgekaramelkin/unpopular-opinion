@@ -23,7 +23,7 @@ const trpcClient = trpc.createClient({
     httpBatchLink({
       url: env.VITE_BACKEND_TRPC_URL,
       headers: () => {
-        const token = Cookies.get('user-token')
+        const token = Cookies.get('unpopularopinion-token')
 
         return {
           ...(token && { authorization: `Bearer ${token}` }),

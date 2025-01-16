@@ -8,7 +8,7 @@ export const SignOutPage = () => {
   const navigate = useNavigate()
   const trpcUtils = trpc.useContext()
   useEffect(() => {
-    Cookies.remove('user-token')
+    Cookies.remove('unpopularopinion-token')
     void trpcUtils.invalidate().then(() => {
       void navigate(routes.getSignInRoute())
     })
