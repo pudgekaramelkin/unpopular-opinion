@@ -4,6 +4,8 @@ extends:
 ignorePatterns:
   - node_modules
   - dist
+plugins:
+  - node
 rules:
   import/order:
     - error
@@ -32,6 +34,7 @@ rules:
   no-console:
     - error
     - allow:
-      - info
-      - error
-      - warn
+        - info
+        - error
+        - warn
+  node/no-process-env: error
