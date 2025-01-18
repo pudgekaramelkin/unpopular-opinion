@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
+import { EditOpinionPage } from './pages/EditOpinionPage'
 import { NewOpinionPage } from './pages/NewOpinionPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
@@ -21,6 +22,7 @@ export const App = () => {
             <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
             <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
             <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
+            <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
             <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
             <Route path={routes.getSignInRoute()} element={<SignInPage />} />
           </Route>

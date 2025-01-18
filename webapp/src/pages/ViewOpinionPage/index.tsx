@@ -1,30 +1,49 @@
 import format from 'date-fns/format'
 import { useParams } from 'react-router-dom'
+import { LinkButton } from '../../components/Button'
 import { Segment } from '../../components/Segment'
-import { type ViewOpinionParams } from '../../lib/routes'
+import { getEditOpinionRoute, type ViewOpinionParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import styles from './index.module.scss'
 
 export const ViewOpinionPage = () => {
   const { opinionNick } = useParams() as ViewOpinionParams
 
-  const { data, error, isLoading, isFetching, isError } = trpc.getOpinion.useQuery({ opinionNick })
+  const getOpinionResult = trpc.getOpinion.useQuery({
+    opinionNick,
+  })
 
-  if (isLoading || isFetching) {
+  const getMeResult = trpc.getMe.useQuery()
+
+  if (getOpinionResult.isLoading || getOpinionResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
     return <span>loading...</span>
   }
 
-  if (isError) {
-    return <span>error: {error.message}</span>
+  if (getOpinionResult.isError) {
+    return <span>error: {getOpinionResult.error.message}</span>
   }
 
-  return data.opinion ? (
-    <Segment title={data.opinion.name} description={data.opinion.description}>
-      <div className={styles.text} dangerouslySetInnerHTML={{ __html: data.opinion.text }}></div>
-      <div className={styles.createdAt}>created at: {format(data.opinion.createdAt, 'yyyy-MM-dd')}</div>
-      <div className={styles.author}>by: {data.opinion.author.nick}</div>
+  if (getMeResult.isError) {
+    return <span>error: {getMeResult.error.message}</span>
+  }
+
+  if (!getOpinionResult.data.opinion) {
+    return <span>Idea not found</span>
+  }
+
+  const opinion = getOpinionResult.data.opinion
+  const me = getMeResult.data.me
+
+  return (
+    <Segment title={opinion.name} description={opinion.description}>
+      <div className={styles.text} dangerouslySetInnerHTML={{ __html: opinion.text }}></div>
+      <div className={styles.createdAt}>created at: {format(opinion.createdAt, 'yyyy-MM-dd')}</div>
+      <div className={styles.author}>by: {opinion.author.nick}</div>
+      {me?.id === opinion.authorId && (
+        <div className={styles.editButton}>
+          <LinkButton to={getEditOpinionRoute({ opinionNick: opinion.nick })}>edit opinion</LinkButton>
+        </div>
+      )}
     </Segment>
-  ) : (
-    <p className={styles.description}>opinion not found.</p>
   )
 }
