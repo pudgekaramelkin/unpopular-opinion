@@ -11,6 +11,7 @@ import { Textarea } from '../../components/Textarea'
 import { useForm } from '../../lib/form'
 import { type EditOpinionRouteParams, getViewOpinionRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
+import { useMe } from '../../lib/сtx'
 
 const EditOpinionComponent = ({ opinion }: { opinion: NonNullable<TrpcRouterOutput['getOpinion']['opinion']> }) => {
   const navigate = useNavigate()
@@ -48,9 +49,10 @@ export const EditOpinionPage = () => {
   const getOpinionResult = trpc.getOpinion.useQuery({
     opinionNick,
   })
-  const getMeResult = trpc.getMe.useQuery()
 
-  if (getOpinionResult.isLoading || getOpinionResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
+  const me = useMe()
+
+  if (getOpinionResult.isLoading || getOpinionResult.isFetching) {
     return <span>=loading...</span>
   }
 
@@ -58,16 +60,11 @@ export const EditOpinionPage = () => {
     return <span>error: {getOpinionResult.error.message}</span>
   }
 
-  if (getMeResult.isError) {
-    return <span>error: {getMeResult.error.message}</span>
-  }
-
   if (!getOpinionResult.data.opinion) {
     return <span>opinion not found</span>
   }
 
   const opinion = getOpinionResult.data.opinion
-  const me = getMeResult.data.me
 
   if (!me) {
     return <span>only for authorized</span>

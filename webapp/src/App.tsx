@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
+import { AppContextProvider } from './lib/сtx'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
 import { EditOpinionPage } from './pages/EditOpinionPage'
 import { NewOpinionPage } from './pages/NewOpinionPage'
@@ -15,19 +16,21 @@ import './styles/global.scss'
 export const App = () => {
   return (
     <TrpcProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
-          <Route element={<Layout />}>
-            <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
-            <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
-            <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
-            <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
-            <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
-            <Route path={routes.getSignInRoute()} element={<SignInPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
+            <Route element={<Layout />}>
+              <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
+              <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
+              <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
+              <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
+              <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
+              <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AppContextProvider>
     </TrpcProvider>
   )
 }

@@ -4,6 +4,7 @@ import { LinkButton } from '../../components/Button'
 import { Segment } from '../../components/Segment'
 import { getEditOpinionRoute, type ViewOpinionParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
+import { useMe } from '../../lib/сtx'
 import styles from './index.module.scss'
 
 export const ViewOpinionPage = () => {
@@ -13,9 +14,9 @@ export const ViewOpinionPage = () => {
     opinionNick,
   })
 
-  const getMeResult = trpc.getMe.useQuery()
+  const me = useMe()
 
-  if (getOpinionResult.isLoading || getOpinionResult.isFetching || getMeResult.isLoading || getMeResult.isFetching) {
+  if (getOpinionResult.isLoading || getOpinionResult.isFetching) {
     return <span>loading...</span>
   }
 
@@ -23,16 +24,11 @@ export const ViewOpinionPage = () => {
     return <span>error: {getOpinionResult.error.message}</span>
   }
 
-  if (getMeResult.isError) {
-    return <span>error: {getMeResult.error.message}</span>
-  }
-
   if (!getOpinionResult.data.opinion) {
     return <span>Idea not found</span>
   }
 
   const opinion = getOpinionResult.data.opinion
-  const me = getMeResult.data.me
 
   return (
     <Segment title={opinion.name} description={opinion.description}>
