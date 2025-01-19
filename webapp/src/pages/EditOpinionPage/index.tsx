@@ -1,4 +1,3 @@
-import type { TrpcRouterOutput } from '@unpopularopinion/backend/src/router'
 import { zUpdateOpinionTrpcInput } from '@unpopularopinion/backend/src/router/updateOpinion/input'
 import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -9,11 +8,27 @@ import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { type EditOpinionRouteParams, getViewOpinionRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
-import { useMe } from '../../lib/сtx'
 
-const EditOpinionComponent = ({ opinion }: { opinion: NonNullable<TrpcRouterOutput['getOpinion']['opinion']> }) => {
+export const EditOpinionPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    const { opinionNick } = useParams() as EditOpinionRouteParams
+    return trpc.getOpinion.useQuery({
+      opinionNick,
+    })
+  },
+  checkExists: ({ queryResult }) => !!queryResult.data.opinion,
+  checkExistsMessage: 'opinion not found',
+  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.opinion?.authorId,
+  checkAccessMessage: 'an opinion can only be edited by the author',
+  setProps: ({ queryResult }) => ({
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    opinion: queryResult.data.opinion!,
+  }),
+})(({ opinion }) => {
   const navigate = useNavigate()
   const updateOpinion = trpc.updateOpinion.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
@@ -41,38 +56,4 @@ const EditOpinionComponent = ({ opinion }: { opinion: NonNullable<TrpcRouterOutp
       </form>
     </Segment>
   )
-}
-
-export const EditOpinionPage = () => {
-  const { opinionNick } = useParams() as EditOpinionRouteParams
-
-  const getOpinionResult = trpc.getOpinion.useQuery({
-    opinionNick,
-  })
-
-  const me = useMe()
-
-  if (getOpinionResult.isLoading || getOpinionResult.isFetching) {
-    return <span>=loading...</span>
-  }
-
-  if (getOpinionResult.isError) {
-    return <span>error: {getOpinionResult.error.message}</span>
-  }
-
-  if (!getOpinionResult.data.opinion) {
-    return <span>opinion not found</span>
-  }
-
-  const opinion = getOpinionResult.data.opinion
-
-  if (!me) {
-    return <span>only for authorized</span>
-  }
-
-  if (me.id !== opinion.authorId) {
-    return <span>an opinion can only be edited by the author</span>
-  }
-
-  return <EditOpinionComponent opinion={opinion} />
-}
+})

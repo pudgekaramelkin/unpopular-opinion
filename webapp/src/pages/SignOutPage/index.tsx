@@ -15,5 +15,5 @@ export const SignOutPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <p>Loading...</p>
+  return <p>loading...</p>
 }

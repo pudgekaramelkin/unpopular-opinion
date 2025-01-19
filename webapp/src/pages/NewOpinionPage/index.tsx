@@ -6,9 +6,12 @@ import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { trpc } from '../../lib/trpc'
 
-export const NewOpinionPage = () => {
+export const NewOpinionPage = withPageWrapper({
+  authorizedOnly: true,
+})(() => {
   const createOpinion = trpc.createOpinion.useMutation()
 
   const { formik, buttonProps, alertProps } = useForm({
@@ -46,4 +49,4 @@ export const NewOpinionPage = () => {
       </form>
     </Segment>
   )
-}
+})

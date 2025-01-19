@@ -18,7 +18,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
         me: data?.me || null,
       }}
     >
-      {isLoading || isFetching ? <p>Loading...</p> : isError ? <p>Error: {error.message}</p> : children}
+      {isLoading || isFetching ? <p>loading...</p> : isError ? <p>error: {error.message}</p> : children}
     </AppReactContext.Provider>
   )
 }
