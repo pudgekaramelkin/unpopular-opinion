@@ -6,6 +6,7 @@ import { AppContextProvider } from './lib/сtx'
 import { AllOpinionsPage } from './pages/AllOpinionsPage'
 import { EditOpinionPage } from './pages/EditOpinionPage'
 import { NewOpinionPage } from './pages/NewOpinionPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SignUpPage'
@@ -27,6 +28,7 @@ export const App = () => {
               <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
               <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
               <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
