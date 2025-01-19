@@ -14,11 +14,8 @@ export const ViewOpinionPage = withPageWrapper({
       opinionNick,
     })
   },
-  checkExists: ({ queryResult }) => !!queryResult.data.opinion,
-  checkAccessMessage: 'opinion not found',
-  setProps: ({ queryResult, ctx }) => ({
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    opinion: queryResult.data.opinion!,
+  setProps: ({ queryResult, checkExists, ctx }) => ({
+    opinion: checkExists(queryResult.data.opinion, 'opinion not found'),
     me: ctx.me,
   }),
 })(({ opinion, me }) => (

@@ -20,14 +20,13 @@ export const EditOpinionPage = withPageWrapper({
       opinionNick,
     })
   },
-  checkExists: ({ queryResult }) => !!queryResult.data.opinion,
-  checkExistsMessage: 'opinion not found',
-  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.opinion?.authorId,
-  checkAccessMessage: 'an opinion can only be edited by the author',
-  setProps: ({ queryResult }) => ({
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    opinion: queryResult.data.opinion!,
-  }),
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const opinion = checkExists(queryResult.data.opinion, 'opinion not found')
+    checkAccess(ctx.me?.id === opinion.authorId, 'an opinion can only be edited by author')
+    return {
+      opinion,
+    }
+  },
 })(({ opinion }) => {
   const navigate = useNavigate()
   const updateOpinion = trpc.updateOpinion.useMutation()
