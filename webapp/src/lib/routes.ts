@@ -20,3 +20,5 @@ export const getSignOutRoute = () => '/sign-out'
 export const editOpinionRouteParams = getRouteParams({ opinionNick: true })
 export type EditOpinionRouteParams = typeof editOpinionRouteParams
 export const getEditOpinionRoute = ({ opinionNick }: EditOpinionRouteParams) => `/opinions/${opinionNick}/edit`
+
+export const getEditProfilePage = () => '/edit-profile'

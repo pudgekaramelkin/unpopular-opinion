@@ -3,6 +3,7 @@ import { Layout } from './components/Layout'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AppContextProvider } from './lib/сtx'
+import { EditProfilePage } from './pages/auth/EditProfilePage'
 import { SignInPage } from './pages/auth/SignInPage'
 import { SignOutPage } from './pages/auth/SignOutPage'
 import { SignUpPage } from './pages/auth/SignUpPage'
@@ -28,6 +29,7 @@ export const App = () => {
               <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
               <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
               <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+              <Route path={routes.getEditProfilePage()} element={<EditProfilePage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

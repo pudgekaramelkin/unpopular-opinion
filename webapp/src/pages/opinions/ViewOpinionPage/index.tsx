@@ -22,7 +22,9 @@ export const ViewOpinionPage = withPageWrapper({
   <Segment title={opinion.name} description={opinion.description}>
     <div className={styles.text} dangerouslySetInnerHTML={{ __html: opinion.text }}></div>
     <div className={styles.createdAt}>created at: {format(opinion.createdAt, 'yyyy-MM-dd')}</div>
-    <div className={styles.author}>by: {opinion.author.nick}</div>
+    <div className={styles.author}>
+      by: {opinion.author.nick} {opinion.author.name ? `(${opinion.author.name})` : ''}
+    </div>
     {me?.id === opinion.authorId && (
       <div className={styles.editButton}>
         <LinkButton to={getEditOpinionRoute({ opinionNick: opinion.nick })}>edit opinion</LinkButton>
