@@ -19,7 +19,6 @@ $breakpoint: '<=1200px';
     border-right: 1px solid $brown;
     @include media($breakpoint) {
       overflow: visible;
-      flex: 0 0 auto;
       height: auto;
       border-right: none;
       border-bottom: 1px solid $brown;

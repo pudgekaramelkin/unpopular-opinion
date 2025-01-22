@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Loader } from '../../../components/Loader'
 import * as routes from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 
@@ -15,5 +16,5 @@ export const SignOutPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <p>loading...</p>
+  return <Loader type="page" />
 }
