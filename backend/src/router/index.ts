@@ -9,6 +9,7 @@ import { updateProfileTrpcRoute } from './auth/updateProfile'
 import { createOpinionTrpcRoute } from './opinions/createOpinion'
 import { getOpinionTrpcRoute } from './opinions/getOpinion'
 import { getOpinionsTrpcRoute } from './opinions/getOpinions'
+import { setOpinionLikeTrpcRoute } from './opinions/setOpinionLike'
 import { updateOpinionTrpcRoute } from './opinions/updateOpinion'
 // @endindex
 
@@ -22,6 +23,7 @@ export const trpcRouter = trpc.router({
   createOpinion: createOpinionTrpcRoute,
   getOpinion: getOpinionTrpcRoute,
   getOpinions: getOpinionsTrpcRoute,
+  setOpinionLike: setOpinionLikeTrpcRoute,
   updateOpinion: updateOpinionTrpcRoute,
   // @endindex
 })

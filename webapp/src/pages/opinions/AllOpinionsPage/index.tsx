@@ -57,7 +57,9 @@ export const AllOpinionsPage = () => {
                       </Link>
                     }
                     description={opinion.description}
-                  />
+                  >
+                    likes: {opinion.likesCount}
+                  </Segment>
                 </div>
               ))}
           </div>
