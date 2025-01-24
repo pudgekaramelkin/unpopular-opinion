@@ -13,7 +13,7 @@ export const Input = ({
   label: string
   formik: FormikProps<any>
   type?: 'text' | 'password'
-  maxWidth?: number
+  maxWidth?: number | string
 }) => {
   const value = formik.values[name]
   const error = formik.errors[name] as string | undefined

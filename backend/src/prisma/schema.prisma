@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
@@ -8,13 +9,19 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  nick          String         @unique
-  name          String         @default("")
+  id            String           @id @default(uuid())
+  nick          String           @unique
+  name          String           @default("")
   password      String
-  createdAt     DateTime       @default(now())
+  createdAt     DateTime         @default(now())
   opinions      Opinion[]
   opinionsLikes OpinionsLike[]
+  permissions   UserPermission[]
+}
+
+enum UserPermission {
+  BLOCK_OPINIONS
+  ALL
 }
 
 model Opinion {
@@ -28,6 +35,7 @@ model Opinion {
   authorId      String
   author        User           @relation(fields: [authorId], references: [id])
   opinionsLikes OpinionsLike[]
+  blockedAt     DateTime?
 }
 
 model OpinionsLike {

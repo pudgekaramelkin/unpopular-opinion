@@ -1,6 +1,10 @@
 @import '../../../styles/vars';
 @import '../../../styles/mixins';
 
+.filter {
+  margin-bottom: 20px;
+}
+
 .opinions {
   .opinion {
     padding: 10px 20px;

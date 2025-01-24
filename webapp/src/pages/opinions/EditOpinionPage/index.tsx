@@ -1,4 +1,5 @@
 import { zUpdateOpinionTrpcInput } from '@unpopularopinion/backend/src/router/opinions/updateOpinion/input'
+import { canEditOpinion } from '@unpopularopinion/backend/src/utils/can'
 import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
@@ -22,7 +23,7 @@ export const EditOpinionPage = withPageWrapper({
   },
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const opinion = checkExists(queryResult.data.opinion, 'opinion not found')
-    checkAccess(ctx.me?.id === opinion.authorId, 'an opinion can only be edited by author')
+    checkAccess(canEditOpinion(ctx.me, opinion), 'an opinion can only be edited by author')
     return {
       opinion,
     }

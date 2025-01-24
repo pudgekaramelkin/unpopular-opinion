@@ -1,4 +1,5 @@
 import { trpc } from '../../../lib/trpc'
+import { canEditOpinion } from '../../../utils/can'
 import { zUpdateOpinionTrpcInput } from './input'
 
 export const updateOpinionTrpcRoute = trpc.procedure.input(zUpdateOpinionTrpcInput).mutation(async ({ ctx, input }) => {
@@ -14,8 +15,8 @@ export const updateOpinionTrpcRoute = trpc.procedure.input(zUpdateOpinionTrpcInp
   if (!opinion) {
     throw new Error('NOT_FOUND')
   }
-  if (ctx.me.id !== opinion.authorId) {
-    throw new Error('NOT_YOUR_OPINION')
+  if (!canEditOpinion(ctx.me, opinion)) {
+    throw new Error('NOT_YOUR_IDEA')
   }
   if (opinion.nick !== input.nick) {
     const exOpinion = await ctx.prisma.opinion.findUnique({

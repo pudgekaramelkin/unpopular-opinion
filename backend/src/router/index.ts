@@ -6,6 +6,7 @@ import { signInTrpcRoute } from './auth/signIn'
 import { signUpTrpcRoute } from './auth/signUp'
 import { updatePasswordTrpcRoute } from './auth/updatePassword'
 import { updateProfileTrpcRoute } from './auth/updateProfile'
+import { blockOpinionTrpcRoute } from './opinions/blockOpinion'
 import { createOpinionTrpcRoute } from './opinions/createOpinion'
 import { getOpinionTrpcRoute } from './opinions/getOpinion'
 import { getOpinionsTrpcRoute } from './opinions/getOpinions'
@@ -20,6 +21,7 @@ export const trpcRouter = trpc.router({
   signUp: signUpTrpcRoute,
   updatePassword: updatePasswordTrpcRoute,
   updateProfile: updateProfileTrpcRoute,
+  blockOpinion: blockOpinionTrpcRoute,
   createOpinion: createOpinionTrpcRoute,
   getOpinion: getOpinionTrpcRoute,
   getOpinions: getOpinionsTrpcRoute,

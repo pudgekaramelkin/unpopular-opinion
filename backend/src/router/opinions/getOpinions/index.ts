@@ -3,6 +3,8 @@ import { trpc } from '../../../lib/trpc'
 import { zGetOpinionsTrpcInput } from './input'
 
 export const getOpinionsTrpcRoute = trpc.procedure.input(zGetOpinionsTrpcInput).query(async ({ ctx, input }) => {
+  // const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, '_') : undefined
+  const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, ' & ') : undefined
   const rawOpinions = await ctx.prisma.opinion.findMany({
     select: {
       id: true,
@@ -15,6 +17,30 @@ export const getOpinionsTrpcRoute = trpc.procedure.input(zGetOpinionsTrpcInput).
           opinionsLikes: true,
         },
       },
+    },
+    where: {
+      blockedAt: null,
+      ...(!normalizedSearch
+        ? {}
+        : {
+            OR: [
+              {
+                name: {
+                  search: normalizedSearch,
+                },
+              },
+              {
+                description: {
+                  search: normalizedSearch,
+                },
+              },
+              {
+                text: {
+                  search: normalizedSearch,
+                },
+              },
+            ],
+          }),
     },
     orderBy: [
       {
