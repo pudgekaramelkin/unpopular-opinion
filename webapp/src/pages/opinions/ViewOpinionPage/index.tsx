@@ -78,6 +78,7 @@ export const ViewOpinionPage = withPageWrapper({
     me: ctx.me,
   }),
   showLoaderOnFetching: false,
+  title: ({ opinion }) => opinion.name,
 })(({ opinion, me }) => (
   <Segment title={opinion.name} description={opinion.description}>
     <div className={styles.text} dangerouslySetInnerHTML={{ __html: opinion.text }}></div>

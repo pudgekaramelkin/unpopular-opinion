@@ -28,6 +28,7 @@ export const EditOpinionPage = withPageWrapper({
       opinion,
     }
   },
+  title: ({ opinion }) => `edit opinion "${opinion.name}"`,
 })(({ opinion }) => {
   const navigate = useNavigate()
   const updateOpinion = trpc.updateOpinion.useMutation()

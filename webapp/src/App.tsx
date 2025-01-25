@@ -1,3 +1,4 @@
+import { HelmetProvider } from 'react-helmet-async'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import * as routes from './lib/routes'
@@ -17,24 +18,26 @@ import './styles/global.scss'
 
 export const App = () => {
   return (
-    <TrpcProvider>
-      <AppContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
-            <Route element={<Layout />}>
-              <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
-              <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
-              <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
-              <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
-              <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
-              <Route path={routes.getSignInRoute()} element={<SignInPage />} />
-              <Route path={routes.getEditProfilePage()} element={<EditProfilePage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AppContextProvider>
-    </TrpcProvider>
+    <HelmetProvider>
+      <TrpcProvider>
+        <AppContextProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
+              <Route element={<Layout />}>
+                <Route path={routes.getAllOpinionsRoute()} element={<AllOpinionsPage />} />
+                <Route path={routes.getNewOpinionRoute()} element={<NewOpinionPage />} />
+                <Route path={routes.getViewOpinionRoute(routes.viewOpinionRouteParams)} element={<ViewOpinionPage />} />
+                <Route path={routes.getEditOpinionRoute(routes.editOpinionRouteParams)} element={<EditOpinionPage />} />
+                <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
+                <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+                <Route path={routes.getEditProfilePage()} element={<EditProfilePage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AppContextProvider>
+      </TrpcProvider>
+    </HelmetProvider>
   )
 }

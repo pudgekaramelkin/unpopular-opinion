@@ -11,6 +11,7 @@ import { trpc } from '../../../lib/trpc'
 
 export const SignInPage = withPageWrapper({
   redirectAuthorized: true,
+  title: 'sign in',
 })(() => {
   const trpcUtils = trpc.useContext()
   const signIn = trpc.signIn.useMutation()

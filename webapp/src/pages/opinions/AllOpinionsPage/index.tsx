@@ -8,11 +8,15 @@ import { layoutContentElRef } from '../../../components/Layout'
 import { Loader } from '../../../components/Loader'
 import { Segment } from '../../../components/Segment'
 import { useForm } from '../../../lib/form'
+import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getViewOpinionRoute } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 import styles from './index.module.scss'
 
-export const AllOpinionsPage = () => {
+export const AllOpinionsPage = withPageWrapper({
+  title: 'opinion nick.',
+  isTitleExact: true,
+})(() => {
   const { formik } = useForm({
     initialValues: { search: '' },
     validationSchema: zGetOpinionsTrpcInput.pick({ search: true }),
@@ -81,4 +85,4 @@ export const AllOpinionsPage = () => {
       )}
     </Segment>
   )
-}
+})

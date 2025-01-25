@@ -11,6 +11,7 @@ import { trpc } from '../../../lib/trpc'
 
 export const NewOpinionPage = withPageWrapper({
   authorizedOnly: true,
+  title: 'new opinion',
 })(() => {
   const createOpinion = trpc.createOpinion.useMutation()
 
