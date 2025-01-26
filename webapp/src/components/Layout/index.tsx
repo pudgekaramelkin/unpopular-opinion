@@ -1,5 +1,6 @@
 import { createRef } from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { ReactComponent as Logo } from '../../assets/images/logo.svg'
 import * as routes from '../../lib/routes'
 import { useMe } from '../../lib/сtx'
 import styles from './index.module.scss'
@@ -12,7 +13,7 @@ export const Layout = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.navigation}>
-        <div className={styles.logo}>unpopularopinion.</div>
+        <Logo className={styles.logo} />
         <ul className={styles.menu}>
           <li className={styles.item}>
             <Link className={styles.link} to={routes.getAllOpinionsRoute()}>

@@ -34,7 +34,7 @@ const General = ({ me }: { me: NonNullable<TrpcRouterOutput['getMe']['me']> }) =
         <Input label="nick" name="nick" formik={formik} />
         <Input label="name" name="name" formik={formik} />
         <Alert {...alertProps} />
-        <Button {...buttonProps}>Update Profile</Button>
+        <Button {...buttonProps}>update profile</Button>
       </FormItems>
     </form>
   )
@@ -74,7 +74,7 @@ const Password = () => {
         <Input label="new password" name="newPassword" type="password" formik={formik} />
         <Input label="new password again" name="newPasswordAgain" type="password" formik={formik} />
         <Alert {...alertProps} />
-        <Button {...buttonProps}>update Password</Button>
+        <Button {...buttonProps}>update password</Button>
       </FormItems>
     </form>
   )
