@@ -1,0 +1,17 @@
+<mjml>
+  <mj-head>
+    <mj-title>Thanks For Registration!</mj-title>
+    <mj-include path="./_head.mjml" />
+  </mj-head>
+  <mj-body mj-class="body">
+    <mj-include path="./_header.mjml" />
+    <mj-section mj-class="content">
+      <mj-column>
+        <mj-text mj-class="h1">thanks for registration, {{userNick}}!</mj-text>
+        <mj-text mj-class="text">publish your first unpopular opinion:</mj-text>
+        <mj-button mj-class="button" href="{{addOpinionUrl}}">add opinion</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-include path="./_footer.mjml" />
+  </mj-body>
+</mjml>
