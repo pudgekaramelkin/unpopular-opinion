@@ -1,3 +1,4 @@
+import { sendOpinionBlockedEmail } from '../../../lib/emails'
 import { trpc } from '../../../lib/trpc'
 import { canBlockOpinions } from '../../../utils/can'
 import { zBlockOpinionTrpcInput } from './input'
@@ -7,12 +8,15 @@ export const blockOpinionTrpcRoute = trpc.procedure.input(zBlockOpinionTrpcInput
   if (!canBlockOpinions(ctx.me)) {
     throw new Error('PERMISSION_DENIED')
   }
-  const idea = await ctx.prisma.opinion.findUnique({
+  const opinion = await ctx.prisma.opinion.findUnique({
     where: {
       id: opinionId,
     },
+    include: {
+      author: true,
+    },
   })
-  if (!idea) {
+  if (!opinion) {
     throw new Error('NOT_FOUND')
   }
   await ctx.prisma.opinion.update({
@@ -23,5 +27,6 @@ export const blockOpinionTrpcRoute = trpc.procedure.input(zBlockOpinionTrpcInput
       blockedAt: new Date(),
     },
   })
+  void sendOpinionBlockedEmail({ user: opinion.author, opinion })
   return true
 })
