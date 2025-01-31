@@ -16,7 +16,7 @@ export const updateOpinionTrpcRoute = trpc.procedure.input(zUpdateOpinionTrpcInp
     throw new Error('NOT_FOUND')
   }
   if (!canEditOpinion(ctx.me, opinion)) {
-    throw new Error('NOT_YOUR_IDEA')
+    throw new Error('NOT_YOUR_OPINION')
   }
   if (opinion.nick !== input.nick) {
     const exOpinion = await ctx.prisma.opinion.findUnique({

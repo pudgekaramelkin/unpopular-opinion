@@ -11,6 +11,6 @@ export const canBlockOpinions = (user: MaybeUser) => {
   return hasPermission(user, 'BLOCK_OPINIONS')
 }
 
-export const canEditOpinion = (user: MaybeUser, idea: MaybeOpinion) => {
-  return !!user && !!idea && user?.id === idea?.authorId
+export const canEditOpinion = (user: MaybeUser, opinion: MaybeOpinion) => {
+  return !!user && !!opinion && user?.id === opinion?.authorId
 }
