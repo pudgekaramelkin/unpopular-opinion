@@ -14,9 +14,6 @@ void (async () => {
     await presetDb(ctx)
     const expressApp = express()
     expressApp.use(cors())
-    expressApp.get('/ping', (req, res) => {
-      res.send('pong')
-    })
     applyPassportToExpressApp(expressApp, ctx)
     await applyTrpcToExpressApp(expressApp, ctx, trpcRouter)
     expressApp.listen(env.PORT, () => {
