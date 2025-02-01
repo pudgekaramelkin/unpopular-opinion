@@ -1,6 +1,6 @@
 <mjml>
   <mj-head>
-    <mj-title>Thanks For Registration!</mj-title>
+    <mj-title>thanks for registration!</mj-title>
     <mj-include path="./_head.mjml" />
   </mj-head>
   <mj-body mj-class="body">

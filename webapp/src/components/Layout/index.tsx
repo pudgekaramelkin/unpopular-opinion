@@ -13,7 +13,9 @@ export const Layout = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.navigation}>
-        <Logo className={styles.logo} />
+        <Link to={routes.getAllOpinionsRoute()}>
+          <Logo className={styles.logo} />
+        </Link>
         <ul className={styles.menu}>
           <li className={styles.item}>
             <Link className={styles.link} to={routes.getAllOpinionsRoute()}>
